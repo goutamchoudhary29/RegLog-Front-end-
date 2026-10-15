@@ -13,11 +13,13 @@ export default function Home() {
   if (!user) return null;
 
   async function handleLogout() {
-    if (!window.confirm("Are you sure you want to log out?")) return;
     setLoggingOut(true);
     try {
       await logout();
-      navigate("/login", { replace: true });
+      navigate("/login", {
+        replace: true,
+        state: { message: "You have logged out. Session terminated. Please enter credentials to log in again." }
+      });
     } finally {
       setLoggingOut(false);
     }
@@ -76,6 +78,14 @@ export default function Home() {
               <div className="profile-label">Mobile number</div>
               <div className="profile-value">
                 <Phone size={14} /> {user.mobileNumber}
+              </div>
+            </div>
+          </div>
+          <div className="profile-row">
+            <div>
+              <div className="profile-label">Role</div>
+              <div className="profile-value">
+                <ShieldCheck size={14} /> {user.role || "ROLE_USER"}
               </div>
             </div>
           </div>

@@ -8,8 +8,9 @@ import { api } from "../api/client.js";
 export default function VerifyOtp() {
   const navigate = useNavigate();
   const location = useLocation();
+  const devOtp = location.state?.devOtp || "";
   const [email, setEmail] = useState(location.state?.email || "");
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(devOtp);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,6 +39,11 @@ export default function VerifyOtp() {
       <div className="auth-wrapper glass-card">
         <h1 className="auth-title">Verify OTP</h1>
         <p className="auth-subtitle">Enter the code sent to your email address.</p>
+        {devOtp && (
+          <div className="alert success" style={{ marginBottom: 12 }}>
+            Your OTP is: <strong>{devOtp}</strong>
+          </div>
+        )}
         {message && <div className="alert error">{message}</div>}
         <form className="form-grid" onSubmit={handleSubmit} noValidate>
           <FormField label="Email address" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />

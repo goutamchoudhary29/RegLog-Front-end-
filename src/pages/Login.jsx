@@ -18,6 +18,22 @@ export default function Login() {
   );
   const [loading, setLoading] = useState(false);
 
+  React.useEffect(() => {
+    if (location.state?.message) {
+      setMessage(location.state.message);
+    }
+  }, [location.state?.message]);
+
+  React.useEffect(() => {
+    // Prevent back navigation to previous authenticated views
+    window.history.pushState(null, "", window.location.href);
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
   async function handleSubmit(event) {
     event.preventDefault();
     const next = {};

@@ -25,9 +25,9 @@ export default function ForgotPassword() {
     try {
       const { data } = await api.post("/auth/forgot-password", { email });
       setMessage(data.message || "If an account exists, an OTP has been sent.");
-      setTimeout(() => navigate("/verify-otp", { state: { email } }), 900);
+      setTimeout(() => navigate("/verify-otp", { state: { email, devOtp: data.otp } }), 1000);
     } catch (err) {
-      setMessage(err.response?.data?.message || "Request failed. Please try again.");
+      setError(err.response?.data?.message || "Request failed. Please try again.");
     } finally {
       setLoading(false);
     }
