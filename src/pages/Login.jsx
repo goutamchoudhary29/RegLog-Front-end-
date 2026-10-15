@@ -40,6 +40,7 @@ export default function Login() {
   return (
     <PageShell maxWidth="520px">
       <div className="auth-wrapper glass-card">
+        <div className="auth-kicker">Secure sign in</div>
         <h1 className="auth-title">Welcome back</h1>
         <p className="auth-subtitle">Sign in with your registered email or mobile number.</p>
         {message && <div className={`alert ${location.state?.registered ? "success" : "error"}`}>{message}</div>}

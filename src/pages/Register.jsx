@@ -60,6 +60,7 @@ export default function Register() {
   return (
     <PageShell maxWidth="520px">
       <div className="auth-wrapper glass-card">
+        <div className="auth-kicker">Secure registration</div>
         <h1 className="auth-title">Create Your Account</h1>
         <p className="auth-subtitle">Join a secure workspace with email or mobile login.</p>
         {message && <div className="alert error">{message}</div>}
